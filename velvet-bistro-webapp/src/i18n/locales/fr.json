@@ -1,0 +1,272 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "menu": "Carte",
+    "gallery": "Galerie",
+    "blog": "Journal",
+    "about": "À propos",
+    "branches": "Établissements",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "exploreMenu": "Découvrir la Carte",
+    "viewGallery": "Voir la Galerie",
+    "bookTable": "Réserver une Table"
+  },
+  "categories": {
+    "breakfast": "Petit-déjeuner",
+    "mainCourses": "Plats Principaux",
+    "desserts": "Desserts",
+    "coffee": "Café",
+    "signatureDrinks": "Boissons Signature",
+    "fineDining": "Haute Cuisine",
+    "all": "Tout"
+  },
+  "hero": {
+    "eyebrow": "Café de Luxe & Gastronomie",
+    "title": "Velvet Bistro",
+    "subtitle": "Où l'art culinaire rencontre l'élégance intemporelle",
+    "exploreMenu": "Découvrir la Carte",
+    "viewGallery": "Voir la Galerie",
+    "scroll": "Faites défiler pour découvrir"
+  },
+  "home": {
+    "featuredDishes": "Plats Vedettes",
+    "featuredDishesDesc": "Des assiettes artisanales qui définissent notre identité culinaire",
+    "signatureDrinks": "Boissons Signature",
+    "signatureDrinksDesc": "Mixologie et art du café dans chaque gorgée",
+    "ambiance": "Ambiance Luxueuse",
+    "ambianceDesc": "Une atmosphère conçue pour des moments inoubliables",
+    "chefRec": "Recommandation du Chef",
+    "chefRecDesc": "Sélectionné par le Chef Exécutif Laurent Moreau",
+    "stats": "Notre Héritage en Chiffres",
+    "storyTeaser": "Notre Histoire",
+    "storyTeaserDesc": "Né à Genève, inspiré par le monde",
+    "galleryPreview": "Aperçu Galerie",
+    "galleryPreviewDesc": "Un aperçu de l'expérience Velvet",
+    "reservationCta": "Commencez Votre Expérience",
+    "reservationCtaDesc": "Réservez votre table pour une soirée raffinée",
+    "faqPreview": "Questions Fréquentes",
+    "viewAll": "Voir Tout",
+    "learnMore": "En Savoir Plus"
+  },
+  "menu": {
+    "title": "Notre Carte",
+    "subtitle": "Des saveurs sélectionnées pour chaque moment de la journée",
+    "search": "Rechercher des plats...",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "sortName": "Nom",
+    "sortPriceLow": "Prix : Croissant",
+    "sortPriceHigh": "Prix : Décroissant",
+    "noResults": "Aucun article ne correspond à votre recherche",
+    "calories": "cal",
+    "featured": "Vedette",
+    "viewDetails": "Voir Détails"
+  },
+  "menuDetail": {
+    "ingredients": "Ingrédients",
+    "allergens": "Allergènes",
+    "calories": "Calories",
+    "pairings": "Accords Recommandés",
+    "askAbout": "Demander à Propos de ce Plat",
+    "contactUs": "Nous Contacter",
+    "none": "Aucun indiqué"
+  },
+  "gallery": {
+    "title": "Galerie",
+    "subtitle": "Des moments capturés en lumière, saveur et design",
+    "categories": {
+      "all": "Tout",
+      "food": "Cuisine",
+      "drinks": "Boissons",
+      "interior": "Intérieur",
+      "chef": "Chef",
+      "dining": "Service"
+    }
+  },
+  "about": {
+    "title": "Notre Histoire",
+    "subtitle": "Un voyage de passion, de précision et d'hospitalité",
+    "mission": "Mission",
+    "missionText": "Créer des expériences gastronomiques extraordinaires célébrant les ingrédients locaux, l'inspiration mondiale et l'art de l'hospitalité.",
+    "vision": "Vision",
+    "visionText": "Devenir la marque de café et restaurant de luxe la plus aimée d'Europe — où chaque invité se sent comme un roi.",
+    "team": "Rencontrez l'Équipe",
+    "awards": "Prix & Reconnaissance",
+    "whyUs": "Pourquoi Choisir Velvet",
+    "whyUsItems": {
+      "quality": "Qualité Exceptionnelle",
+      "qualityDesc": "Uniquement les meilleurs ingrédients, sourcés de manière éthique et durable.",
+      "ambiance": "Ambiance Inégalée",
+      "ambianceDesc": "Chaque détail conçu pour la chaleur, l'élégance et le confort.",
+      "service": "Service Impeccable",
+      "serviceDesc": "Un personnel attentif et compétent dédié à votre expérience."
+    },
+    "location": "Nous Trouver"
+  },
+  "branches": {
+    "title": "Nos Établissements",
+    "subtitle": "Trois destinations, une philosophie d'excellence",
+    "hours": "Horaires",
+    "phone": "Téléphone",
+    "email": "Email",
+    "directions": "Itinéraire",
+    "mapTitle": "Toutes les Adresses"
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "subtitle": "Nous serions ravis de vous entendre",
+    "phone": "Téléphone",
+    "email": "Email",
+    "address": "Adresse",
+    "hours": "Horaires",
+    "formTitle": "Envoyer un Message",
+    "fullName": "Nom Complet",
+    "emailField": "Email",
+    "phoneField": "Téléphone",
+    "branch": "Établissement Préféré",
+    "occasion": "Occasion",
+    "message": "Message",
+    "submit": "Envoyer",
+    "successTitle": "Message Envoyé !",
+    "successDesc": "Merci de nous avoir contactés. Notre équipe vous répondra sous 24 heures.",
+    "whatsapp": "Discuter sur WhatsApp",
+    "selectBranch": "Choisir un établissement",
+    "selectOccasion": "Choisir une occasion",
+    "occasions": {
+      "dining": "Haute Cuisine",
+      "celebration": "Célébration",
+      "corporate": "Événement Corporate",
+      "inquiry": "Demande Générale",
+      "feedback": "Commentaires"
+    }
+  },
+  "faq": {
+    "title": "Questions Fréquentes",
+    "subtitle": "Tout ce que vous devez savoir sur Velvet Bistro",
+    "categories": {
+      "menu": "Carte",
+      "reservations": "Réservations",
+      "branches": "Établissements",
+      "events": "Événements",
+      "allergies": "Allergies",
+      "support": "Support"
+    }
+  },
+  "footer": {
+    "tagline": "La gastronomie de luxe, réinventée",
+    "navigation": "Navigation",
+    "categories": "Catégories du Menu",
+    "contact": "Contact",
+    "newsletter": "Restez Connecté",
+    "newsletterDesc": "Rejoignez notre cercle pour les menus saisonniers et événements exclusifs.",
+    "rights": "Tous droits réservés.",
+    "privacy": "Politique de Confidentialité",
+    "terms": "Conditions d'Utilisation"
+  },
+  "notFound": {
+    "title": "Page Non Trouvée",
+    "desc": "La page que vous recherchez n'existe pas ou a été déplacée.",
+    "back": "Retour à l'Accueil"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "backToTop": "Retour en haut",
+    "readMore": "Lire la suite",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
+  },
+  "premium": {
+    "testimonials": {
+      "eyebrow": "Voix de nos Hôtes",
+      "title": "Ce Que Disent Nos Invités",
+      "subtitle": "Témoignages de ceux qui ont vécu l'expérience Velvet"
+    },
+    "trustedBy": {
+      "title": "Reconnu par les Leaders de l'Industrie"
+    },
+    "stats": {
+      "eyebrow": "En Chiffres",
+      "title": "Notre Héritage en Chiffres"
+    },
+    "awards": {
+      "eyebrow": "Reconnaissance",
+      "title": "Prix & Certifications",
+      "subtitle": "Honorés par les institutions culinaires les plus respectées"
+    },
+    "whyUs": {
+      "eyebrow": "La Différence Velvet",
+      "title": "Pourquoi Choisir Velvet Bistro"
+    },
+    "timeline": {
+      "eyebrow": "Notre Parcours",
+      "title": "Une Histoire de Passion & Précision"
+    },
+    "team": {
+      "eyebrow": "Direction",
+      "title": "Rencontrez l'Équipe Culinaire"
+    },
+    "blog": {
+      "eyebrow": "Le Journal Velvet",
+      "title": "Histoires de Notre Cuisine",
+      "featured": "À la Une",
+      "pageTitle": "Le Journal Velvet",
+      "pageSubtitle": "Insights, recettes et histoires au cœur de Velvet Bistro",
+      "back": "Retour au Journal"
+    },
+    "caseStudies": {
+      "eyebrow": "Succès",
+      "title": "Célébrations & Réalisations",
+      "subtitle": "Moments mémorables que nous avons eu le privilège de créer"
+    },
+    "faq": {
+      "eyebrow": "Questions",
+      "searchPlaceholder": "Rechercher des questions...",
+      "noResults": "Aucune question ne correspond à votre recherche"
+    },
+    "social": {
+      "eyebrow": "Communauté",
+      "title": "Suivez Notre Aventure",
+      "follow": "Suivre sur Instagram"
+    },
+    "bento": {
+      "eyebrow": "Découvrir",
+      "title": "L'Expérience Velvet",
+      "subtitle": "Chaque aspect de notre univers, conçu pour des moments inoubliables"
+    },
+    "story": {
+      "eyebrow": "Une Journée chez Velvet"
+    },
+    "horizontal": {
+      "eyebrow": "Sélection Curatée",
+      "title": "Nos Signatures"
+    },
+    "gallery": {
+      "eyebrow": "Voyage Visuel",
+      "title": "Galerie Interactive"
+    },
+    "cinematic": {
+      "eyebrow": "Plat Signature"
+    },
+    "floating": {
+      "eyebrow": "Tout au Long de la Journée",
+      "title": "Moments d'Indulgence",
+      "subtitle": "De l'espresso matinal au dîner gastronomique — chaque heure a sa magie"
+    },
+    "values": {
+      "eyebrow": "Notre Philosophie",
+      "title": "Mission, Vision & Valeurs",
+      "subtitle": "Les principes qui guident chaque assiette, chaque verre, chaque accueil"
+    },
+    "process": {
+      "eyebrow": "Notre Méthode",
+      "title": "Votre Parcours avec Nous",
+      "subtitle": "De la première demande au souvenir durable — notre approche en cinq étapes"
+    },
+    "cta": {
+      "title": "Commencez Votre Expérience Velvet",
+      "subtitle": "Réservez votre table et entrez dans un monde où l'art culinaire rencontre l'élégance intemporelle",
+      "note": "Genève · Zurich · Paris"
+    }
+  }
+}

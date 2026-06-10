@@ -1,0 +1,409 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "gallery": "Gallery",
+    "blog": "Blog",
+    "about": "About Us",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "menu": "Menu",
+    "close": "Close",
+    "viewAll": "View All Products",
+    "featured": "Featured"
+  },
+  "hero": {
+    "badge": "Premium Mobility Showcase",
+    "title": "Engineered for",
+    "titleHighlight": "Every Journey",
+    "subtitle": "Discover world-class bicycles, electric scooters, and motorcycles curated for performance, design, and innovation.",
+    "exploreProducts": "Explore Products",
+    "viewGallery": "View Gallery",
+    "scroll": "Scroll to explore"
+  },
+  "brands": {
+    "title": "Trusted Brands",
+    "subtitle": "We partner with industry-leading manufacturers to bring you the finest mobility solutions."
+  },
+  "featured": {
+    "title": "Featured Collection",
+    "subtitle": "Handpicked vehicles representing the pinnacle of engineering and design.",
+    "viewDetails": "View Details",
+    "requestInfo": "Request Information"
+  },
+  "stats": {
+    "brands": "Partner Brands",
+    "products": "Vehicles Showcased",
+    "customers": "Happy Clients",
+    "years": "Years of Excellence"
+  },
+  "whyUs": {
+    "title": "Why Choose RideHub",
+    "subtitle": "Your trusted partner in premium mobility.",
+    "expertise": "Expert Curation",
+    "expertiseDesc": "Every vehicle is hand-selected by mobility specialists.",
+    "quality": "Premium Quality",
+    "qualityDesc": "Only world-class brands that meet our rigorous standards.",
+    "service": "Dedicated Support",
+    "serviceDesc": "Personal guidance from inquiry to delivery and beyond.",
+    "experience": "Showroom Experience",
+    "experienceDesc": "Visit our flagship showroom for hands-on exploration."
+  },
+  "products": {
+    "title": "Our Collection",
+    "subtitle": "Browse our curated catalog of premium bicycles, scooters, and motorcycles.",
+    "search": "Search products...",
+    "filterType": "Vehicle Type",
+    "filterBrand": "Brand",
+    "sortBy": "Sort By",
+    "sortFeatured": "Featured First",
+    "sortNameAsc": "Name A–Z",
+    "sortNameDesc": "Name Z–A",
+    "sortNewest": "Newest First",
+    "allTypes": "All Types",
+    "allBrands": "All Brands",
+    "bicycle": "Bicycles",
+    "scooter": "Electric Scooters",
+    "motorcycle": "Motorcycles",
+    "noResults": "No products match your filters.",
+    "clearFilters": "Clear Filters",
+    "featured": "Featured Vehicles",
+    "inStock": "In Stock",
+    "preOrder": "Pre-Order",
+    "comingSoon": "Coming Soon",
+    "limited": "Limited Edition"
+  },
+  "productDetail": {
+    "specs": "Specifications",
+    "features": "Key Features",
+    "gallery": "Gallery",
+    "related": "Related Vehicles",
+    "requestInfo": "Request Information",
+    "contactSales": "Contact Sales",
+    "availability": "Availability",
+    "colors": "Available Colors",
+    "motor": "Motor",
+    "battery": "Battery",
+    "speed": "Top Speed",
+    "range": "Range",
+    "weight": "Weight",
+    "frame": "Frame",
+    "brakes": "Brakes",
+    "year": "Release Year",
+    "backToProducts": "Back to Products"
+  },
+  "gallery": {
+    "title": "Visual Gallery",
+    "subtitle": "Explore our world of premium mobility through stunning photography.",
+    "all": "All",
+    "bicycle": "Bicycles",
+    "scooter": "Scooters",
+    "motorcycle": "Motorcycles",
+    "showroom": "Showroom",
+    "lifestyle": "Lifestyle",
+    "technology": "Technology",
+    "viewImage": "View Image"
+  },
+  "about": {
+    "title": "About RideHub",
+    "subtitle": "Redefining premium mobility since 2010.",
+    "storyTitle": "Our Story",
+    "storyP1": "Founded in San Francisco, RideHub began with a simple vision: to create a destination where enthusiasts and professionals could experience the world's finest bicycles, electric scooters, and motorcycles under one roof.",
+    "storyP2": "Today, we partner with over 24 leading brands and showcase more than 180 vehicles, serving clients across North America and Europe with unmatched expertise and passion.",
+    "missionTitle": "Our Mission",
+    "mission": "To inspire and enable exceptional mobility experiences through curated premium vehicles, expert guidance, and a commitment to sustainable innovation.",
+    "visionTitle": "Our Vision",
+    "vision": "To be the global benchmark for premium mobility showcase — where design, technology, and human experience converge.",
+    "partnersTitle": "Brand Partnerships",
+    "partnersSubtitle": "We collaborate with the world's most respected mobility brands.",
+    "locationTitle": "Visit Our Showroom",
+    "locationSubtitle": "Experience our collection in person at our flagship location."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We're here to help you find your perfect vehicle.",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "hours": "Working Hours",
+    "weekdays": "Weekdays",
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+    "formTitle": "Send Us a Message",
+    "formSubtitle": "Fill out the form and our team will respond within 24 hours.",
+    "name": "Full Name",
+    "namePlaceholder": "John Doe",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "john@example.com",
+    "phoneLabel": "Phone Number",
+    "phonePlaceholder": "+1 (555) 000-0000",
+    "interest": "Vehicle Interest",
+    "interestPlaceholder": "Select a category",
+    "message": "Message",
+    "messagePlaceholder": "Tell us about your needs...",
+    "submit": "Send Message",
+    "sending": "Sending...",
+    "successTitle": "Message Sent!",
+    "successMessage": "Thank you for reaching out. Our team will get back to you shortly.",
+    "sendAnother": "Send Another Message",
+    "whatsapp": "Chat on WhatsApp",
+    "errors": {
+      "nameRequired": "Name is required",
+      "emailInvalid": "Please enter a valid email",
+      "phoneRequired": "Phone is required",
+      "messageMin": "Message must be at least 10 characters",
+      "interestRequired": "Please select a vehicle interest"
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Find answers to common questions about our products and services.",
+    "search": "Search FAQ...",
+    "categories": {
+      "products": "Products",
+      "availability": "Availability",
+      "warranty": "Warranty",
+      "business": "Business Orders",
+      "support": "Support"
+    },
+    "noResults": "No questions match your search.",
+    "contactCta": "Still have questions?",
+    "contactBtn": "Contact Our Team",
+    "q1": "What types of vehicles does RideHub showcase?",
+    "a1": "RideHub showcases premium bicycles, electric scooters, and electric motorcycles from world-leading brands including Trek, Giant, Specialized, Segway, Xiaomi, and Zero Motorcycles.",
+    "q2": "Can I test ride a vehicle before purchasing?",
+    "a2": "Yes! Our flagship showroom offers scheduled test rides for most vehicles in our collection. Contact our team to book your personalized experience.",
+    "q3": "Do you offer electric and non-electric options?",
+    "a3": "Absolutely. Our catalog includes traditional performance bicycles alongside cutting-edge electric bikes, scooters, and motorcycles to suit every preference.",
+    "q4": "How do I check product availability?",
+    "a4": "Each product page displays current availability status. For real-time updates, contact our sales team directly via phone, email, or the contact form.",
+    "q5": "Can I pre-order upcoming models?",
+    "a5": "Yes, pre-orders are available for select upcoming models. Submit a request through the product page or contact form to secure your reservation.",
+    "q6": "What warranty coverage is included?",
+    "a6": "Warranty terms vary by brand and product category. All vehicles include manufacturer warranty, and we provide extended coverage options for added peace of mind.",
+    "q7": "Do you offer service and maintenance?",
+    "a7": "Our certified technicians provide comprehensive service and maintenance for all brands we represent, from routine tune-ups to complex repairs.",
+    "q8": "Do you handle fleet and business orders?",
+    "a8": "Yes, we specialize in fleet solutions for businesses, municipalities, and corporate clients. Contact our business team for customized proposals.",
+    "q9": "What are the minimum order quantities for business clients?",
+    "a9": "Minimum quantities vary by product and brand. We work with orders of all sizes and offer volume pricing for qualifying business accounts.",
+    "q10": "How can I get product specifications?",
+    "a10": "Detailed specifications are available on each product page. For technical datasheets or comparison guides, contact our support team.",
+    "q11": "What are your showroom hours?",
+    "a11": "We're open Monday through Friday 9 AM – 7 PM, Saturday 10 AM – 6 PM, and Sunday 11 AM – 5 PM. Holiday hours may vary.",
+    "q12": "How do I reach customer support?",
+    "a12": "Reach us by phone, email, WhatsApp, or through the contact form on our website. We aim to respond to all inquiries within 24 hours."
+  },
+  "footer": {
+    "description": "Premium showcase for world-class bicycles, electric scooters, and motorcycles.",
+    "navigation": "Navigation",
+    "brands": "Our Brands",
+    "contact": "Contact",
+    "newsletter": "Newsletter",
+    "newsletterDesc": "Stay updated with new arrivals and exclusive showcases.",
+    "emailPlaceholder": "Your email address",
+    "subscribe": "Subscribe",
+    "subscribed": "Thank you for subscribing!",
+    "rights": "All rights reserved.",
+    "backToTop": "Back to top"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "subtitle": "The page you're looking for doesn't exist or has been moved.",
+    "backHome": "Back to Home"
+  },
+  "common": {
+    "learnMore": "Learn More",
+    "viewAll": "View All",
+    "loading": "Loading...",
+    "themeLight": "Light mode",
+    "themeDark": "Dark mode",
+    "language": "Language",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "megaMenu": {
+    "bicycles": "Bicycles",
+    "scooters": "Electric Scooters",
+    "motorcycles": "Motorcycles",
+    "byBrand": "Shop by Brand",
+    "featuredProduct": "Featured Product"
+  },
+  "home": {
+    "trustedBy": {
+      "title": "Trusted by Industry Leaders",
+      "subtitle": "Partner brands and organizations that rely on RideHub for premium mobility solutions."
+    },
+    "testimonials": {
+      "badge": "Client Stories",
+      "title": "What Our Clients Say",
+      "subtitle": "Real experiences from riders, fleet operators, and corporate partners."
+    },
+    "achievements": {
+      "badge": "By the Numbers",
+      "title": "Statistics & Achievements",
+      "subtitle": "Fifteen years of excellence in premium mobility showcase and fleet solutions.",
+      "customers": "Clients Served",
+      "delivered": "Vehicles Delivered",
+      "years": "Years Experience",
+      "countries": "Countries Reached",
+      "awards": "Awards Won",
+      "growth": "Business Growth"
+    },
+    "awards": {
+      "badge": "Recognition",
+      "title": "Awards & Certifications",
+      "subtitle": "Industry recognition for excellence in premium mobility retail and sustainability."
+    },
+    "whyUs": {
+      "badge": "Our Advantage",
+      "title": "Why Choose RideHub",
+      "subtitle": "The definitive destination for premium bicycles, e-scooters, and electric motorcycles.",
+      "expertise": "Expert Curation",
+      "expertiseDesc": "Every vehicle hand-selected by certified mobility specialists with decades of combined experience.",
+      "quality": "Premium Quality",
+      "qualityDesc": "Only world-class brands that meet our rigorous engineering and design standards.",
+      "service": "Dedicated Support",
+      "serviceDesc": "Personal guidance from inquiry to delivery, with 24-hour response commitment.",
+      "experience": "Showroom Experience",
+      "experienceDesc": "8,000 sq ft flagship showroom for hands-on exploration and scheduled test rides.",
+      "innovation": "Cutting-Edge Innovation",
+      "innovationDesc": "180+ vehicles showcasing the latest in e-mobility technology and design.",
+      "global": "Global Reach",
+      "globalDesc": "Serving clients across 18 countries with international brand partnerships.",
+      "community": "Community Focus",
+      "communityDesc": "12,000+ satisfied clients and active support for local cycling initiatives.",
+      "sustainability": "Zero-Emission Focus",
+      "sustainabilityDesc": "Championing sustainable mobility with comprehensive electric vehicle collections."
+    },
+    "timeline": {
+      "badge": "Our Journey",
+      "title": "Company Story Timeline",
+      "subtitle": "From a San Francisco vision to a global premium mobility benchmark."
+    },
+    "team": {
+      "badge": "Our People",
+      "title": "Leadership & Team",
+      "subtitle": "Passionate mobility experts dedicated to your perfect ride.",
+      "leadership": "Leadership",
+      "members": "Our Team"
+    },
+    "blog": {
+      "badge": "Insights",
+      "title": "Mobility Blog",
+      "subtitle": "Expert guides, industry trends, and showroom tips for the modern rider.",
+      "readMore": "Read Article",
+      "viewAll": "View All Articles",
+      "pageTitle": "Mobility Blog",
+      "pageSubtitle": "Expert insights on bicycles, e-scooters, and electric motorcycles.",
+      "back": "Back to Blog"
+    },
+    "caseStudies": {
+      "badge": "Success Stories",
+      "title": "Case Studies & Outcomes",
+      "subtitle": "How organizations achieve measurable results with RideHub mobility solutions.",
+      "challenge": "Challenge",
+      "solution": "Solution",
+      "outcome": "Outcome",
+      "readStory": "Read Full Story"
+    },
+    "faq": {
+      "badge": "Support",
+      "title": "Frequently Asked Questions",
+      "subtitle": "Quick answers to the most common questions about our products and services.",
+      "viewAll": "View Full FAQ"
+    },
+    "social": {
+      "badge": "Community",
+      "title": "Follow Our Journey",
+      "subtitle": "Daily inspiration from the RideHub community — trails, cities, and showroom moments.",
+      "follow": "Follow on Instagram"
+    },
+    "bento": {
+      "badge": "Explore",
+      "title": "Premium Mobility Ecosystem",
+      "subtitle": "Everything you need for exceptional two-wheel and electric mobility experiences.",
+      "bicycles": "Performance Bicycles",
+      "bicyclesDesc": "Trail, road, gravel, and e-MTB from Trek, Giant, and Specialized.",
+      "electric": "Electric Power",
+      "electricDesc": "Next-gen e-bikes & scooters",
+      "motorcycles": "Electric Motorcycles",
+      "motorcyclesDesc": "Zero-emission performance",
+      "warranty": "Extended Warranty",
+      "showroom": "Flagship Showroom",
+      "showroomDesc": "San Francisco — test rides by appointment",
+      "fleet": "Fleet Solutions",
+      "curated": "Expert Curated"
+    },
+    "story": {
+      "badge": "The RideHub Experience",
+      "discover": "Discover Your Perfect Match",
+      "discoverDesc": "Browse 180+ curated vehicles across bicycles, e-scooters, and electric motorcycles — each selected for performance and design excellence.",
+      "experience": "Experience It Firsthand",
+      "experienceDesc": "Schedule a showroom visit or test ride. Feel the engineering, explore the technology, and ride with confidence before you decide.",
+      "deliver": "Delivered With Care",
+      "deliverDesc": "From personalized configuration to white-glove delivery and ongoing support — we are with you at every mile of your journey."
+    },
+    "horizontal": {
+      "badge": "Collection",
+      "title": "Featured Vehicles",
+      "subtitle": "Scroll through our handpicked selection of premium mobility machines."
+    },
+    "gallery": {
+      "badge": "Visual Gallery",
+      "title": "Interactive Gallery",
+      "subtitle": "Filter and explore stunning photography from trails, cities, and our showroom.",
+      "viewAll": "View Full Gallery"
+    },
+    "cinematic": {
+      "badge": "Premium Collection",
+      "title": "Engineered for Every Journey",
+      "subtitle": "From mountain trails to urban commutes and open highways — discover vehicles that redefine what mobility means."
+    },
+    "floating": {
+      "badge": "Experience",
+      "title": "Built for Performance",
+      "subtitle": "Three pillars that define the RideHub difference.",
+      "performance": "Peak Performance",
+      "performanceDesc": "World-class engineering from brands that push the boundaries of speed, range, and reliability.",
+      "electric": "Electric Future",
+      "electricDesc": "Leading the transition to zero-emission mobility with the finest electric vehicles available.",
+      "local": "Local Expertise",
+      "localDesc": "San Francisco roots with global brand partnerships and personalized local service."
+    },
+    "values": {
+      "badge": "Who We Are",
+      "title": "Brand Values & Culture",
+      "subtitle": "The principles that guide every interaction, curation, and client relationship.",
+      "mission": "Our Mission",
+      "missionDesc": "To inspire exceptional mobility experiences through curated premium vehicles, expert guidance, and sustainable innovation.",
+      "vision": "Our Vision",
+      "visionDesc": "To be the global benchmark for premium mobility showcase — where design, technology, and human experience converge.",
+      "culture": "Our Culture",
+      "cultureDesc": "A team of passionate riders and mobility enthusiasts who believe every journey deserves the perfect machine.",
+      "innovation": "Innovation Drive",
+      "innovationDesc": "Constantly exploring emerging technologies in e-mobility to bring clients the most advanced options."
+    },
+    "process": {
+      "badge": "How We Work",
+      "title": "Our Process",
+      "subtitle": "A seamless journey from first inquiry to lifelong support.",
+      "discover": "Discover",
+      "discoverDesc": "Explore our curated catalog online or visit our showroom to find vehicles matching your needs.",
+      "experience": "Experience",
+      "experienceDesc": "Schedule test rides and hands-on sessions with our mobility specialists.",
+      "customize": "Customize",
+      "customizeDesc": "Configure colors, accessories, and fleet packages tailored to your requirements.",
+      "deliver": "Deliver",
+      "deliverDesc": "White-glove delivery, setup, and onboarding for individual and fleet orders.",
+      "support": "Support",
+      "supportDesc": "Ongoing maintenance, warranty service, and dedicated account management."
+    },
+    "cta": {
+      "badge": "Get Started",
+      "title": "Ready to Find Your Perfect Ride?",
+      "subtitle": "Visit our flagship showroom, schedule a test ride, or contact our team for personalized guidance on your next mobility investment.",
+      "primary": "Contact Our Team"
+    }
+  }
+}
