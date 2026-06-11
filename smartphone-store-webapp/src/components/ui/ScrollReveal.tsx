@@ -40,7 +40,7 @@ export function ScrollReveal({
 
     const offset = offsets[direction]
 
-    gsap.fromTo(
+    const tween = gsap.fromTo(
       el,
       { opacity: 0, ...offset },
       {
@@ -58,10 +58,15 @@ export function ScrollReveal({
       }
     )
 
+    requestAnimationFrame(() => {
+      if (tween.scrollTrigger?.isActive) {
+        tween.progress(1)
+      }
+    })
+
     return () => {
-      ScrollTrigger.getAll().forEach((st) => {
-        if (st.trigger === el) st.kill()
-      })
+      tween.scrollTrigger?.kill(true)
+      tween.kill()
     }
   }, [delay, direction, duration])
 

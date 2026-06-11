@@ -22,6 +22,7 @@ import {
 import * as THREE from 'three'
 import { cn } from '@/lib/utils'
 import { heroModels } from '@/config/heroModels'
+import { MotorcycleModel } from '@/components/three/MotorcycleModel'
 
 interface HeroVehicleConfig {
   id: string
@@ -37,15 +38,6 @@ interface HeroVehicleConfig {
 
 const HERO_VEHICLES: HeroVehicleConfig[] = [
   {
-    id: 'bicycle',
-    path: heroModels.bicycle.path,
-    position: [-0.45, -0.05, 0],
-    rotation: [0, Math.PI / 5, 0],
-    targetSize: 1.5,
-    spin: 0.12,
-    useOriginalMaterials: true,
-  },
-  {
     id: 'scooter',
     path: heroModels.scooter.path,
     position: [0.55, -0.15, 0.15],
@@ -56,12 +48,15 @@ const HERO_VEHICLES: HeroVehicleConfig[] = [
   },
 ]
 
+const MOTORCYCLE_AVAILABLE = heroModels.motorcycle.path
+
 const DEFAULT_ACCENT = ['#dc2626', '#2563eb', '#94a3b8', '#1e293b', '#f8fafc']
 const HeroInteractContext = createContext(false)
 
 for (const config of HERO_VEHICLES) {
   useGLTF.preload(config.path)
 }
+useGLTF.preload(MOTORCYCLE_AVAILABLE)
 
 async function isGlbAvailable(path: string): Promise<boolean> {
   try {
@@ -294,9 +289,29 @@ function VehicleModel({
   )
 }
 
-function VehicleCluster({ models }: { models: HeroVehicleConfig[] }) {
+function VehicleCluster({
+  models,
+  showMotorcycle,
+}: {
+  models: HeroVehicleConfig[]
+  showMotorcycle: boolean
+}) {
+  const isInteracting = useContext(HeroInteractContext)
+
   return (
     <>
+      {showMotorcycle && (
+        <VehicleModelErrorBoundary key="motorcycle">
+          <Suspense fallback={<LoadingFallback />}>
+            <MotorcycleModel
+              position={[-0.45, -0.05, 0]}
+              rotation={[0, -Math.PI / 5, 0]}
+              targetSize={1.55}
+              isInteracting={isInteracting}
+            />
+          </Suspense>
+        </VehicleModelErrorBoundary>
+      )}
       {models.map((config) => (
         <VehicleModelErrorBoundary key={config.id}>
           <Suspense fallback={<LoadingFallback />}>
@@ -323,7 +338,7 @@ function SceneControls({ onInteractingChange }: { onInteractingChange: (v: boole
       maxPolarAngle={Math.PI / 1.8}
       target={[0.1, 0, 0]}
       autoRotate
-      autoRotateSpeed={0.5}
+      autoRotateSpeed={0.2}
       onStart={() => onInteractingChange(true)}
       onEnd={() => onInteractingChange(false)}
     />
@@ -332,9 +347,11 @@ function SceneControls({ onInteractingChange }: { onInteractingChange: (v: boole
 
 function Scene({
   models,
+  showMotorcycle,
   onInteractingChange,
 }: {
   models: HeroVehicleConfig[]
+  showMotorcycle: boolean
   onInteractingChange: (v: boolean) => void
 }) {
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
@@ -356,7 +373,7 @@ function Scene({
       <directionalLight position={[4, 2, 3]} intensity={0.2} color="#818cf8" />
 
       <group position={[0, -0.05, 0]}>
-        <VehicleCluster models={models} />
+        <VehicleCluster models={models} showMotorcycle={showMotorcycle} />
       </group>
 
       <ContactShadows
@@ -372,7 +389,7 @@ function Scene({
       )}
 
       <Suspense fallback={null}>
-        <Environment preset="studio" background={false} environmentIntensity={0.65} />
+        <Environment preset="city" background={false} environmentIntensity={0.85} />
       </Suspense>
 
       <SceneControls onInteractingChange={onInteractingChange} />
@@ -390,18 +407,23 @@ function LoadingFallback() {
 
 function useAvailableHeroModels() {
   const [models, setModels] = useState<HeroVehicleConfig[]>(HERO_VEHICLES)
+  const [showMotorcycle, setShowMotorcycle] = useState(true)
 
   useEffect(() => {
     let cancelled = false
 
-    Promise.all(
-      HERO_VEHICLES.map(async (config) => {
-        const available = await isGlbAvailable(config.path)
-        return available ? config : null
-      }),
-    ).then((results) => {
+    Promise.all([
+      Promise.all(
+        HERO_VEHICLES.map(async (config) => {
+          const available = await isGlbAvailable(config.path)
+          return available ? config : null
+        }),
+      ),
+      isGlbAvailable(MOTORCYCLE_AVAILABLE),
+    ]).then(([vehicleResults, motorcycleAvailable]) => {
       if (!cancelled) {
-        setModels(results.filter((m): m is HeroVehicleConfig => m !== null))
+        setModels(vehicleResults.filter((m): m is HeroVehicleConfig => m !== null))
+        setShowMotorcycle(motorcycleAvailable)
       }
     })
 
@@ -410,7 +432,7 @@ function useAvailableHeroModels() {
     }
   }, [])
 
-  return models
+  return { models, showMotorcycle }
 }
 
 function PreloadHeroModels({ models }: { models: HeroVehicleConfig[] }) {
@@ -425,7 +447,7 @@ function PreloadHeroModels({ models }: { models: HeroVehicleConfig[] }) {
 
 function HeroCanvas({ className }: { className?: string }) {
   const [isInteracting, setIsInteracting] = useState(false)
-  const availableModels = useAvailableHeroModels()
+  const { models: availableModels, showMotorcycle } = useAvailableHeroModels()
 
   return (
     <div
@@ -438,7 +460,7 @@ function HeroCanvas({ className }: { className?: string }) {
       aria-hidden="true"
     >
       <Canvas
-        camera={{ position: [0, 0.12, 5.8], fov: 36, near: 0.1, far: 50 }}
+        camera={{ position: [0, 0.12, -0.5], fov: 36, near: 0.1, far: 50 }}
         dpr={[1, 1.5]}
         frameloop="always"
         gl={{
@@ -456,7 +478,11 @@ function HeroCanvas({ className }: { className?: string }) {
       >
         <HeroInteractContext.Provider value={isInteracting}>
           <PreloadHeroModels models={availableModels} />
-          <Scene models={availableModels} onInteractingChange={setIsInteracting} />
+          <Scene
+            models={availableModels}
+            showMotorcycle={showMotorcycle}
+            onInteractingChange={setIsInteracting}
+          />
         </HeroInteractContext.Provider>
       </Canvas>
     </div>
@@ -467,8 +493,8 @@ function Hero3DFallback({ className }: { className?: string }) {
   return (
     <div className={cn('flex h-[400px] w-full items-center justify-center md:h-[500px] lg:h-[600px]', className)}>
       <img
-        src="/assets/products/trek-fuel-exe.jpg"
-        alt="RideHub vehicle"
+        src="/assets/products/zero-srf.jpg"
+        alt="RideHub electric motorcycle"
         className="h-auto w-44 rounded-2xl shadow-2xl md:w-56"
       />
     </div>

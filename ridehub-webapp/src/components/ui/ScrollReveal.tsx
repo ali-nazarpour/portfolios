@@ -38,8 +38,14 @@ export function ScrollReveal({ children, className = '', delay = 0, y = 40 }: Sc
       }
     )
 
+    requestAnimationFrame(() => {
+      if (tween.scrollTrigger?.isActive) {
+        tween.progress(1)
+      }
+    })
+
     return () => {
-      tween.scrollTrigger?.kill(false)
+      tween.scrollTrigger?.kill(true)
       tween.kill()
     }
   }, [delay, y])

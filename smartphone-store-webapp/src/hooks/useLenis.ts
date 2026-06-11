@@ -5,6 +5,21 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
+let activeLenis: Lenis | null = null
+
+export function resetScrollOnNavigation() {
+  if (activeLenis) {
+    activeLenis.scrollTo(0, { immediate: true })
+  } else {
+    window.scrollTo(0, 0)
+  }
+}
+
+/** Kill all ScrollTriggers and revert pin spacers so the next route lays out cleanly. */
+export function killAllScrollTriggers() {
+  ScrollTrigger.getAll().forEach((trigger) => trigger.kill(true))
+}
+
 export function useLenis() {
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -16,6 +31,7 @@ export function useLenis() {
       smoothWheel: true,
     })
 
+    activeLenis = lenis
     lenis.on('scroll', ScrollTrigger.update)
 
     const rafCallback = (time: number) => {
@@ -28,6 +44,10 @@ export function useLenis() {
     return () => {
       gsap.ticker.remove(rafCallback)
       lenis.destroy()
+      activeLenis = null
+      killAllScrollTriggers()
     }
   }, [])
 }
+
+export { gsap, ScrollTrigger }

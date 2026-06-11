@@ -44,13 +44,15 @@ export function Navbar() {
   }, [location.pathname])
 
   const secondaryLinks = navLinks.filter((link) => link.key !== 'home' && link.key !== 'menu')
+  const isHomeHero = location.pathname === '/' && !scrolled
 
   return (
     <>
       <header
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
-          scrolled ? 'glass shadow-lg py-3' : 'bg-transparent py-5'
+          scrolled ? 'glass shadow-lg py-3' : 'bg-transparent py-5',
+          isHomeHero && 'max-lg:dark:bg-transparent',
         )}
       >
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
@@ -59,8 +61,8 @@ export function Navbar() {
               <div className="p-2 rounded-xl bg-gold/10 group-hover:bg-gold/20 transition-colors">
                 <UtensilsCrossed className="h-5 w-5 text-gold" />
               </div>
-              <span className="font-serif text-xl font-semibold tracking-tight md:text-2xl">
-                Velvet<span className="text-gradient-gold"> Bistro</span>
+              <span className="font-serif text-xl font-semibold tracking-tight text-charcoal md:text-2xl dark:text-foreground">
+                Velvet<span className="text-gradient-gold-hero"> Bistro</span>
               </span>
             </Link>
 
@@ -69,7 +71,8 @@ export function Navbar() {
                 to="/"
                 className={cn(
                   'px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:text-gold',
-                  location.pathname === '/' && 'text-gold bg-gold/10'
+                  isHomeHero && 'text-charcoal/90 dark:text-foreground',
+                  location.pathname === '/' && 'text-[#8b7035] bg-gold/15 dark:text-gold dark:bg-gold/10'
                 )}
               >
                 {t('nav.home')}
@@ -83,7 +86,8 @@ export function Navbar() {
                 <button
                   className={cn(
                     'flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:text-gold',
-                    (location.pathname.startsWith('/menu') || megaOpen) && 'text-gold bg-gold/10'
+                    isHomeHero && 'text-charcoal/90 dark:text-foreground',
+                    (location.pathname.startsWith('/menu') || megaOpen) && 'text-[#8b7035] bg-gold/15 dark:text-gold dark:bg-gold/10'
                   )}
                   aria-expanded={megaOpen}
                   aria-haspopup="true"
@@ -107,7 +111,8 @@ export function Navbar() {
                   to={link.path}
                   className={cn(
                     'px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:text-gold',
-                    location.pathname === link.path && 'text-gold bg-gold/10'
+                    isHomeHero && 'text-charcoal/90 dark:text-foreground',
+                    location.pathname === link.path && 'text-[#8b7035] bg-gold/15 dark:text-gold dark:bg-gold/10'
                   )}
                 >
                   {t(`nav.${link.key}`)}

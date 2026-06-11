@@ -77,6 +77,7 @@ export function InteractiveGallerySection({ images }: InteractiveGallerySectionP
                 <AssetImage
                   src={img.src}
                   alt={img.alt}
+                  priority={i < 6}
                   className="h-full w-full transition duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 flex items-center justify-center bg-charcoal/50 opacity-0 transition group-hover:opacity-100">

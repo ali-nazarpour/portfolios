@@ -9,6 +9,8 @@ interface SectionShellProps {
 }
 
 export function SectionShell({ children, className, id, variant = 'default' }: SectionShellProps) {
+  const hasColoredContainer = variant === 'muted' || variant === 'bordered'
+
   return (
     <section
       id={id}
@@ -19,7 +21,14 @@ export function SectionShell({ children, className, id, variant = 'default' }: S
         className
       )}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative">{children}</div>
+      <div
+        className={cn(
+          'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative',
+          hasColoredContainer && 'py-4 sm:py-6 lg:py-8'
+        )}
+      >
+        {children}
+      </div>
     </section>
   )
 }

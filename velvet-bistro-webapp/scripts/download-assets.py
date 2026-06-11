@@ -1,122 +1,127 @@
 """Download restaurant-themed images for Velvet Bistro (Pexels, free to use)."""
 import os
-import shutil
 import time
 
 import requests
 
 PEXELS = "https://images.pexels.com/photos"
 HQ = "?auto=compress&cs=tinysrgb&w=1920"
-CARD = "?auto=compress&cs=tinysrgb&w=800"
-SQUARE = "?auto=compress&cs=tinysrgb&w=1080&h=1080&fit=crop"
-AVATAR = "?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop"
+CARD = "?auto=compress&cs=tinysrgb&w=1200"
+SQUARE = "?auto=compress&cs=tinysrgb&w=1200&h=1200&fit=crop"
+AVATAR = "?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop"
+PORTRAIT = "?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop"
+
+
+def pexels(photo_id: int, size: str = CARD) -> str:
+    return f"{PEXELS}/{photo_id}/pexels-photo-{photo_id}.jpeg{size}"
+
 
 IMAGES = {
-    "public/assets/images/hero.jpg": f"{PEXELS}/262047/pexels-photo-262047.jpeg{HQ}",
-    "public/assets/images/ambiance.jpg": f"{PEXELS}/262978/pexels-photo-262978.jpeg{HQ}",
-    "public/assets/images/chef.jpg": f"{PEXELS}/887783/pexels-photo-887783.jpeg{CARD}",
-    "public/assets/images/story.jpg": f"{PEXELS}/941861/pexels-photo-941861.jpeg{HQ}",
-    "public/assets/images/interior.jpg": f"{PEXELS}/941864/pexels-photo-941864.jpeg{HQ}",
-    "public/assets/images/dining.jpg": f"{PEXELS}/941873/pexels-photo-941873.jpeg{HQ}",
-    "public/assets/images/about-hero.jpg": f"{PEXELS}/262047/pexels-photo-262047.jpeg{HQ}",
-    "public/assets/images/contact-hero.jpg": f"{PEXELS}/941861/pexels-photo-941861.jpeg{HQ}",
-    "public/assets/images/private-dining.jpg": f"{PEXELS}/941873/pexels-photo-941873.jpeg{HQ}",
-    "public/assets/images/timeline-2012.jpg": f"{PEXELS}/262047/pexels-photo-262047.jpeg{HQ}",
-    "public/assets/images/timeline-2015.jpg": f"{PEXELS}/262978/pexels-photo-262978.jpeg{HQ}",
-    "public/assets/images/timeline-2023.jpg": f"{PEXELS}/941864/pexels-photo-941864.jpeg{HQ}",
-    "public/assets/images/timeline-2025.jpg": f"{PEXELS}/941861/pexels-photo-941861.jpeg{HQ}",
-    "public/assets/images/blog-espresso.jpg": f"{PEXELS}/302899/pexels-photo-302899.jpeg{HQ}",
-    "public/assets/images/blog-tasting.jpg": f"{PEXELS}/941873/pexels-photo-941873.jpeg{HQ}",
-    "public/assets/images/blog-sustainability.jpg": f"{PEXELS}/143133/pexels-photo-143133.jpeg{HQ}",
-    "public/assets/images/award-michelin.jpg": f"{PEXELS}/941873/pexels-photo-941873.jpeg{CARD}",
-    "public/assets/images/award-world-luxury.jpg": f"{PEXELS}/262047/pexels-photo-262047.jpeg{CARD}",
-    "public/assets/images/award-gault.jpg": f"{PEXELS}/941861/pexels-photo-941861.jpeg{CARD}",
-    "public/assets/images/award-tripadvisor.jpg": f"{PEXELS}/262978/pexels-photo-262978.jpeg{CARD}",
-    "public/assets/images/award-sustainable.jpg": f"{PEXELS}/143133/pexels-photo-143133.jpeg{CARD}",
-    "public/assets/images/award-wine.jpg": f"{PEXELS}/1283219/pexels-photo-1283219.jpeg{CARD}",
-    "public/assets/images/value-craft.jpg": f"{PEXELS}/887783/pexels-photo-887783.jpeg{CARD}",
-    "public/assets/images/value-hospitality.jpg": f"{PEXELS}/262978/pexels-photo-262978.jpeg{CARD}",
-    "public/assets/images/value-sustainability.jpg": f"{PEXELS}/143133/pexels-photo-143133.jpeg{CARD}",
-    "public/assets/images/value-community.jpg": f"{PEXELS}/941864/pexels-photo-941864.jpeg{CARD}",
-    "public/assets/images/case-corporate.jpg": f"{PEXELS}/941873/pexels-photo-941873.jpeg{HQ}",
-    "public/assets/images/case-launch.jpg": f"{PEXELS}/1283219/pexels-photo-1283219.jpeg{HQ}",
-    "public/assets/images/testimonial-01.jpg": f"{PEXELS}/774909/pexels-photo-774909.jpeg{AVATAR}",
-    "public/assets/images/testimonial-02.jpg": f"{PEXELS}/1181686/pexels-photo-1181686.jpeg{AVATAR}",
-    "public/assets/images/testimonial-03.jpg": f"{PEXELS}/2379004/pexels-photo-2379004.jpeg{AVATAR}",
-    "public/assets/images/testimonial-04.jpg": f"{PEXELS}/1239291/pexels-photo-1239291.jpeg{AVATAR}",
-    "public/assets/images/testimonial-05.jpg": f"{PEXELS}/220453/pexels-photo-220453.jpeg{AVATAR}",
-    "public/assets/menu/truffle-croissant-benedict.jpg": f"{PEXELS}/2135/pexels-photo-2135.jpeg{CARD}",
-    "public/assets/menu/golden-brioche-french-toast.jpg": f"{PEXELS}/376464/pexels-photo-376464.jpeg{CARD}",
-    "public/assets/menu/velvet-breakfast-board.jpg": f"{PEXELS}/6293/pexels-photo-6293.jpeg{CARD}",
-    "public/assets/menu/wagyu-tenderloin.jpg": f"{PEXELS}/361184/pexels-photo-361184.jpeg{CARD}",
-    "public/assets/menu/pan-seared-sea-bass.jpg": f"{PEXELS}/46239/pexels-photo-46239.jpeg{CARD}",
-    "public/assets/menu/herb-crusted-lamb-rack.jpg": f"{PEXELS}/361184/pexels-photo-361184.jpeg{CARD}",
-    "public/assets/menu/dark-chocolate-souffle.jpg": f"{PEXELS}/45202/pexels-photo-45202.jpeg{CARD}",
-    "public/assets/menu/pistachio-rose-tart.jpg": f"{PEXELS}/291528/pexels-photo-291528.jpeg{CARD}",
-    "public/assets/menu/creme-brulee-royale.jpg": f"{PEXELS}/45202/pexels-photo-45202.jpeg{CARD}",
-    "public/assets/menu/signature-velvet-espresso.jpg": f"{PEXELS}/302899/pexels-photo-302899.jpeg{CARD}",
-    "public/assets/menu/caramel-affogato.jpg": f"{PEXELS}/302899/pexels-photo-302899.jpeg{CARD}",
-    "public/assets/menu/lavender-latte.jpg": f"{PEXELS}/302899/pexels-photo-302899.jpeg{CARD}",
-    "public/assets/menu/golden-negroni.jpg": f"{PEXELS}/1283219/pexels-photo-1283219.jpeg{CARD}",
-    "public/assets/menu/smoked-old-fashioned.jpg": f"{PEXELS}/1283219/pexels-photo-1283219.jpeg{CARD}",
-    "public/assets/menu/velvet-sparkling-rose.jpg": f"{PEXELS}/1283219/pexels-photo-1283219.jpeg{CARD}",
-    "public/assets/menu/chefs-tasting-omakase.jpg": f"{PEXELS}/941873/pexels-photo-941873.jpeg{CARD}",
-    "public/assets/menu/lobster-thermidor.jpg": f"{PEXELS}/46239/pexels-photo-46239.jpeg{CARD}",
-    "public/assets/menu/black-truffle-risotto.jpg": f"{PEXELS}/143133/pexels-photo-143133.jpeg{CARD}",
-    "public/assets/gallery/gallery-01.jpg": f"{PEXELS}/361184/pexels-photo-361184.jpeg{SQUARE}",
-    "public/assets/gallery/gallery-02.jpg": f"{PEXELS}/376464/pexels-photo-376464.jpeg{SQUARE}",
-    "public/assets/gallery/gallery-03.jpg": f"{PEXELS}/262978/pexels-photo-262978.jpeg{SQUARE}",
-    "public/assets/gallery/gallery-04.jpg": f"{PEXELS}/941873/pexels-photo-941873.jpeg{SQUARE}",
-    "public/assets/gallery/gallery-05.jpg": f"{PEXELS}/46239/pexels-photo-46239.jpeg{SQUARE}",
-    "public/assets/gallery/gallery-06.jpg": f"{PEXELS}/1283219/pexels-photo-1283219.jpeg{SQUARE}",
-    "public/assets/gallery/gallery-07.jpg": f"{PEXELS}/302899/pexels-photo-302899.jpeg{SQUARE}",
-    "public/assets/gallery/gallery-08.jpg": f"{PEXELS}/941864/pexels-photo-941864.jpeg{SQUARE}",
-    "public/assets/gallery/gallery-09.jpg": f"{PEXELS}/887783/pexels-photo-887783.jpeg{SQUARE}",
-    "public/assets/gallery/gallery-10.jpg": f"{PEXELS}/45202/pexels-photo-45202.jpeg{SQUARE}",
-    "public/assets/gallery/gallery-11.jpg": f"{PEXELS}/262047/pexels-photo-262047.jpeg{SQUARE}",
-    "public/assets/gallery/gallery-12.jpg": f"{PEXELS}/941861/pexels-photo-941861.jpeg{SQUARE}",
-    "public/assets/branches/geneva-flagship.jpg": f"{PEXELS}/941861/pexels-photo-941861.jpeg{HQ}",
-    "public/assets/branches/zurich-lounge.jpg": f"{PEXELS}/262978/pexels-photo-262978.jpeg{HQ}",
-    "public/assets/branches/paris-atelier.jpg": f"{PEXELS}/941864/pexels-photo-941864.jpeg{HQ}",
+    # ── Site heroes & pages ──────────────────────────────────────────────
+    "public/assets/images/hero.jpg": pexels(941861, HQ),
+    "public/assets/images/ambiance.jpg": pexels(262978, HQ),
+    "public/assets/images/chef.jpg": pexels(769331, PORTRAIT),
+    "public/assets/images/story.jpg": pexels(262047, HQ),
+    "public/assets/images/interior.jpg": pexels(941864, HQ),
+    "public/assets/images/dining.jpg": pexels(941873, HQ),
+    "public/assets/images/about-hero.jpg": pexels(941864, HQ),
+    "public/assets/images/contact-hero.jpg": pexels(262047, HQ),
+    "public/assets/images/private-dining.jpg": pexels(941873, HQ),
+    # ── Team portraits ───────────────────────────────────────────────────
+    "public/assets/images/team-laurent.jpg": pexels(769331, PORTRAIT),
+    "public/assets/images/team-sophie.jpg": pexels(3756620, PORTRAIT),
+    "public/assets/images/team-marco.jpg": pexels(2746469, PORTRAIT),
+    # ── Timeline ─────────────────────────────────────────────────────────
+    "public/assets/images/timeline-2012.jpg": pexels(262047, HQ),
+    "public/assets/images/timeline-2015.jpg": pexels(262978, HQ),
+    "public/assets/images/timeline-2023.jpg": pexels(941864, HQ),
+    "public/assets/images/timeline-2025.jpg": pexels(941861, HQ),
+    # ── Blog ─────────────────────────────────────────────────────────────
+    "public/assets/images/blog-espresso.jpg": pexels(302899, HQ),
+    "public/assets/images/blog-tasting.jpg": pexels(941873, HQ),
+    "public/assets/images/blog-sustainability.jpg": pexels(143133, HQ),
+    # ── Awards ───────────────────────────────────────────────────────────
+    "public/assets/images/award-michelin.jpg": pexels(941873, CARD),
+    "public/assets/images/award-world-luxury.jpg": pexels(262047, CARD),
+    "public/assets/images/award-gault.jpg": pexels(941861, CARD),
+    "public/assets/images/award-tripadvisor.jpg": pexels(262978, CARD),
+    "public/assets/images/award-sustainable.jpg": pexels(143133, CARD),
+    "public/assets/images/award-wine.jpg": pexels(1283219, CARD),
+    # ── Brand values ─────────────────────────────────────────────────────
+    "public/assets/images/value-craft.jpg": pexels(769331, CARD),
+    "public/assets/images/value-hospitality.jpg": pexels(262978, CARD),
+    "public/assets/images/value-sustainability.jpg": pexels(143133, CARD),
+    "public/assets/images/value-community.jpg": pexels(941864, CARD),
+    # ── Case studies ─────────────────────────────────────────────────────
+    "public/assets/images/case-corporate.jpg": pexels(941873, HQ),
+    "public/assets/images/case-launch.jpg": pexels(1283219, HQ),
+    # ── Testimonials ─────────────────────────────────────────────────────
+    "public/assets/images/testimonial-01.jpg": pexels(774909, AVATAR),
+    "public/assets/images/testimonial-02.jpg": pexels(1181686, AVATAR),
+    "public/assets/images/testimonial-03.jpg": pexels(2379004, AVATAR),
+    "public/assets/images/testimonial-04.jpg": pexels(1239291, AVATAR),
+    "public/assets/images/testimonial-05.jpg": pexels(220453, AVATAR),
+    # ── Menu (unique dish photo per item) ────────────────────────────────
+    "public/assets/menu/truffle-croissant-benedict.jpg": pexels(793786, CARD),
+    "public/assets/menu/golden-brioche-french-toast.jpg": pexels(376464, CARD),
+    "public/assets/menu/velvet-breakfast-board.jpg": pexels(704571, CARD),
+    "public/assets/menu/wagyu-tenderloin.jpg": pexels(3535385, CARD),
+    "public/assets/menu/pan-seared-sea-bass.jpg": pexels(691114, CARD),
+    "public/assets/menu/herb-crusted-lamb-rack.jpg": pexels(769289, CARD),
+    "public/assets/menu/dark-chocolate-souffle.jpg": pexels(6889919, CARD),
+    "public/assets/menu/pistachio-rose-tart.jpg": pexels(291528, CARD),
+    "public/assets/menu/creme-brulee-royale.jpg": pexels(2271106, CARD),
+    "public/assets/menu/signature-velvet-espresso.jpg": pexels(302899, CARD),
+    "public/assets/menu/caramel-affogato.jpg": pexels(8473213, CARD),
+    "public/assets/menu/lavender-latte.jpg": pexels(3121775, CARD),
+    "public/assets/menu/golden-negroni.jpg": pexels(1283219, CARD),
+    "public/assets/menu/smoked-old-fashioned.jpg": pexels(1040828, CARD),
+    "public/assets/menu/velvet-sparkling-rose.jpg": pexels(1964781, CARD),
+    "public/assets/menu/chefs-tasting-omakase.jpg": pexels(941873, CARD),
+    "public/assets/menu/lobster-thermidor.jpg": pexels(566566, CARD),
+    "public/assets/menu/black-truffle-risotto.jpg": pexels(2085661, CARD),
+    # ── Gallery (12 unique shots) ────────────────────────────────────────
+    "public/assets/gallery/gallery-01.jpg": pexels(3535385, SQUARE),
+    "public/assets/gallery/gallery-02.jpg": pexels(376464, SQUARE),
+    "public/assets/gallery/gallery-03.jpg": pexels(262978, SQUARE),
+    "public/assets/gallery/gallery-04.jpg": pexels(941873, SQUARE),
+    "public/assets/gallery/gallery-05.jpg": pexels(691114, SQUARE),
+    "public/assets/gallery/gallery-06.jpg": pexels(1283219, SQUARE),
+    "public/assets/gallery/gallery-07.jpg": pexels(302899, SQUARE),
+    "public/assets/gallery/gallery-08.jpg": pexels(941864, SQUARE),
+    "public/assets/gallery/gallery-09.jpg": pexels(769331, SQUARE),
+    "public/assets/gallery/gallery-10.jpg": pexels(6889919, SQUARE),
+    "public/assets/gallery/gallery-11.jpg": pexels(262047, SQUARE),
+    "public/assets/gallery/gallery-12.jpg": pexels(941861, SQUARE),
+    # ── Branches ─────────────────────────────────────────────────────────
+    "public/assets/branches/geneva-flagship.jpg": pexels(941861, HQ),
+    "public/assets/branches/zurich-lounge.jpg": pexels(262978, HQ),
+    "public/assets/branches/paris-atelier.jpg": pexels(941864, HQ),
 }
 
 session = requests.Session()
 session.headers.update({"User-Agent": "VelvetBistro-Asset-Downloader/1.0"})
 
-FALLBACKS = {
-    "public/assets/images/chef.jpg": "public/assets/gallery/gallery-09.jpg",
-    "public/assets/images/value-craft.jpg": "public/assets/images/chef.jpg",
-    "public/assets/menu/truffle-croissant-benedict.jpg": "public/assets/menu/golden-brioche-french-toast.jpg",
-    "public/assets/menu/velvet-breakfast-board.jpg": "public/assets/menu/golden-brioche-french-toast.jpg",
-    "public/assets/menu/wagyu-tenderloin.jpg": "public/assets/menu/pistachio-rose-tart.jpg",
-    "public/assets/menu/pan-seared-sea-bass.jpg": "public/assets/menu/black-truffle-risotto.jpg",
-    "public/assets/menu/herb-crusted-lamb-rack.jpg": "public/assets/menu/wagyu-tenderloin.jpg",
-    "public/assets/menu/dark-chocolate-souffle.jpg": "public/assets/menu/pistachio-rose-tart.jpg",
-    "public/assets/menu/creme-brulee-royale.jpg": "public/assets/menu/dark-chocolate-souffle.jpg",
-    "public/assets/menu/lobster-thermidor.jpg": "public/assets/menu/pan-seared-sea-bass.jpg",
-    "public/assets/gallery/gallery-01.jpg": "public/assets/gallery/gallery-02.jpg",
-    "public/assets/gallery/gallery-05.jpg": "public/assets/gallery/gallery-04.jpg",
-    "public/assets/gallery/gallery-09.jpg": "public/assets/images/chef.jpg",
-    "public/assets/gallery/gallery-10.jpg": "public/assets/menu/pistachio-rose-tart.jpg",
-}
-
-failed = 0
+failed: list[str] = []
 for path, url in IMAGES.items():
     os.makedirs(os.path.dirname(path), exist_ok=True)
     try:
         response = session.get(url, timeout=120)
         response.raise_for_status()
+        content = response.content
+        if len(content) < 5000:
+            raise requests.RequestException(f"Response too small ({len(content)} bytes)")
         with open(path, "wb") as handle:
-            handle.write(response.content)
-        print(f"Downloaded {path} ({len(response.content):,} bytes)")
+            handle.write(content)
+        print(f"OK  {path} ({len(content):,} bytes)")
     except requests.RequestException as error:
-        failed += 1
-        print(f"FAILED {path}: {error}")
-    time.sleep(0.2)
+        failed.append(path)
+        print(f"FAIL {path}: {error}")
+    time.sleep(0.15)
 
-for path, fallback in FALLBACKS.items():
-    if not os.path.isfile(path) and os.path.isfile(fallback):
-        shutil.copy2(fallback, path)
-        print(f"Copied fallback {fallback} -> {path}")
-
-print(f"Done. {len(IMAGES) - failed}/{len(IMAGES)} images saved.")
+print(f"\nDone. {len(IMAGES) - len(failed)}/{len(IMAGES)} images saved.")
+if failed:
+    print("Failed paths:")
+    for path in failed:
+        print(f"  - {path}")
+    raise SystemExit(1)

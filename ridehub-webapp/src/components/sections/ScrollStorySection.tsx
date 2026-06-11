@@ -44,7 +44,7 @@ export function ScrollStorySection() {
     })
 
     return () => {
-      tl.scrollTrigger?.kill(false)
+      tl.scrollTrigger?.kill(true)
       tl.kill()
     }
   }, [])

@@ -32,7 +32,7 @@ export function CompanyTimelineSection() {
       )
     })
 
-    return () => ScrollTrigger.getAll().forEach((st) => st.kill())
+    return () => ScrollTrigger.getAll().forEach((st) => st.kill(true))
   }, [])
 
   return (

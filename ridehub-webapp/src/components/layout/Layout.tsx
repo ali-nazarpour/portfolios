@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom'
 import { Navbar } from './Navbar'
 import { Footer } from './Footer'
 import { BackToTopButton } from '@/components/ui/BackToTopButton'
-import { killAllScrollTriggers } from '@/hooks/useLenis'
+import { killAllScrollTriggers, resetScrollOnNavigation, ScrollTrigger } from '@/hooks/useLenis'
 import { cn } from '@/lib/utils'
 
 interface LayoutProps {
@@ -14,7 +14,17 @@ export function Layout({ children }: LayoutProps) {
   const location = useLocation()
 
   useLayoutEffect(() => {
-    return () => killAllScrollTriggers()
+    killAllScrollTriggers()
+    resetScrollOnNavigation()
+
+    const frame = requestAnimationFrame(() => {
+      ScrollTrigger.refresh(true)
+    })
+
+    return () => {
+      cancelAnimationFrame(frame)
+      killAllScrollTriggers()
+    }
   }, [location.pathname])
 
   return (

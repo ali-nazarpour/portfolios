@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { TrendingUp } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { CaseStudy } from "@/types/product";
@@ -26,10 +25,7 @@ export function CaseStudiesSection({ studies }: CaseStudiesSectionProps) {
         <div className="space-y-12">
           {studies.map((study, i) => (
             <ScrollReveal key={study.id} delay={i * 0.1}>
-              <motion.div
-                whileInView={{ opacity: 1, y: 0 }}
-                initial={{ opacity: 0, y: 40 }}
-                viewport={{ once: true }}
+              <div
                 className={`grid items-center gap-8 lg:grid-cols-2 ${i % 2 === 1 ? "lg:direction-rtl" : ""}`}
               >
                 <div className={i % 2 === 1 ? "lg:order-2" : ""}>
@@ -55,7 +51,7 @@ export function CaseStudiesSection({ studies }: CaseStudiesSectionProps) {
                     ))}
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </ScrollReveal>
           ))}
         </div>

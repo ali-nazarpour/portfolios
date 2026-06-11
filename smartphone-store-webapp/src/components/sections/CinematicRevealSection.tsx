@@ -54,7 +54,7 @@ export function CinematicRevealSection() {
         0.3,
       )
 
-    return () => ScrollTrigger.getAll().forEach((st) => st.kill())
+    return () => ScrollTrigger.getAll().forEach((st) => st.kill(true))
   }, [])
 
   if (!product) return null

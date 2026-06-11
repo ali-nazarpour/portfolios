@@ -8,7 +8,7 @@ import requests
 MODELS = {
     "bicycle.glb": "https://www.get3dmodels.com/download/Bicycle.glb",
     "scooter.glb": "https://www.get3dmodels.com/download/Scooter-1_by_get3dmodels.glb",
-    "motorcycle.glb": "https://www.get3dmodels.com/download/Motorcycle_by_get3dmodels.glb",
+    "motorcycle.glb": "https://www.get3dmodels.com/download/Motorcycle.glb",
 }
 
 os.makedirs("public/assets/models", exist_ok=True)

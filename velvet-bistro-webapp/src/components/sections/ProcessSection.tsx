@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import type { ProcessStep } from "@/types/product";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
@@ -26,11 +25,12 @@ export function ProcessSection({ steps }: ProcessSectionProps) {
 
           <div className="space-y-8">
             {steps.map((step, i) => (
-              <ScrollReveal key={step.id} delay={i * 0.08}>
-                <motion.div
-                  whileInView={{ opacity: 1, x: 0 }}
-                  initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
-                  viewport={{ once: true }}
+              <ScrollReveal
+                key={step.id}
+                delay={i * 0.08}
+                direction={i % 2 === 0 ? "left" : "right"}
+              >
+                <div
                   className={`relative flex items-start gap-6 md:gap-0 ${
                     i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                   }`}
@@ -52,7 +52,7 @@ export function ProcessSection({ steps }: ProcessSectionProps) {
                   </div>
 
                   <div className="hidden flex-1 md:block" />
-                </motion.div>
+                </div>
               </ScrollReveal>
             ))}
           </div>

@@ -63,6 +63,7 @@ export function HorizontalScrollSection() {
               <AssetImage
                 src={item.image}
                 alt={item.name}
+                priority
                 className="h-full w-full transition duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/20 to-transparent" />

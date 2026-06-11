@@ -74,6 +74,15 @@
     @apply bg-gradient-to-r from-gold via-gold-light to-gold bg-clip-text text-transparent;
   }
 
+  /* Hero — richer gold on light backgrounds, default gradient in dark */
+  .text-gradient-gold-hero {
+    @apply bg-gradient-to-br from-[#6b5216] via-[#a6842e] to-[#8b7035] bg-clip-text text-transparent;
+  }
+
+  .dark .text-gradient-gold-hero {
+    @apply bg-gradient-to-r from-gold via-gold-light to-gold;
+  }
+
   .glow-gold {
     box-shadow: 0 0 60px rgba(201, 169, 98, 0.15);
   }

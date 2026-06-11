@@ -1,4 +1,4 @@
-import { Component, Suspense, useMemo, useRef, useState, type ReactNode } from "react";
+import { Component, Suspense, useCallback, useMemo, useRef, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
@@ -20,6 +20,8 @@ import { AssetImage } from "@/components/products/AssetImage";
 import { heroModels } from "@/config/heroModels";
 
 useGLTF.preload(heroModels.coffeeCup.path);
+
+const HERO_FALLBACK_IMAGE = "/assets/menu/signature-velvet-espresso.jpg";
 
 const CUP_BODY = {
   color: "#d4c4aa",
@@ -155,6 +157,13 @@ function normalizeCupModel(scene: THREE.Group, targetSize: number) {
   clone.traverse((child) => {
     const mesh = child as THREE.Mesh;
     if (!mesh.isMesh) return;
+
+    if (mesh.material) {
+      mesh.material = Array.isArray(mesh.material)
+        ? mesh.material.map((material) => material.clone())
+        : mesh.material.clone();
+    }
+
     applyCupMaterial(mesh);
   });
 
@@ -240,10 +249,44 @@ class CupModelErrorBoundary extends Component<
     return { hasError: true };
   }
 
+  componentDidCatch(error: Error) {
+    console.warn("[Hero3D] Coffee cup model failed to load:", error);
+  }
+
   render() {
     if (this.state.hasError) return this.props.fallback ?? null;
     return this.props.children;
   }
+}
+
+class CanvasErrorBoundary extends Component<
+  { fallback: ReactNode; children: ReactNode },
+  { hasError: boolean }
+> {
+  state = { hasError: false };
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error) {
+    console.warn("[Hero3D] WebGL canvas error:", error);
+  }
+
+  render() {
+    if (this.state.hasError) return this.props.fallback;
+    return this.props.children;
+  }
+}
+
+function HeroImageFallback() {
+  return (
+    <AssetImage
+      src={HERO_FALLBACK_IMAGE}
+      alt="Velvet Bistro espresso"
+      className="h-[400px] w-full object-cover lg:h-[500px]"
+    />
+  );
 }
 
 function Scene3D() {
@@ -275,7 +318,10 @@ function Scene3D() {
       </mesh>
 
       <ContactShadows position={[0, -0.62, 0]} opacity={0.45} scale={5} blur={2.8} far={2.4} />
-      <Environment preset="apartment" background={false} environmentIntensity={1} />
+
+      <Suspense fallback={null}>
+        <Environment preset="apartment" background={false} environmentIntensity={1} />
+      </Suspense>
 
       <OrbitControls
         makeDefault
@@ -295,10 +341,24 @@ function Scene3D() {
   );
 }
 
-function HeroCanvas() {
+function HeroCanvas({ onContextLost }: { onContextLost?: () => void }) {
+  const handleCreated = useCallback(
+    ({ gl }: { gl: THREE.WebGLRenderer }) => {
+      gl.setClearColor(0x000000, 0);
+
+      const canvas = gl.domElement;
+      const onLost = (event: Event) => {
+        event.preventDefault();
+        onContextLost?.();
+      };
+      canvas.addEventListener("webglcontextlost", onLost, { once: true });
+    },
+    [onContextLost],
+  );
+
   return (
     <div
-      className="relative h-[400px] w-full overflow-hidden rounded-3xl lg:h-[500px]"
+      className="relative h-[400px] w-full lg:h-[500px]"
       data-lenis-prevent
     >
       <Canvas
@@ -315,9 +375,8 @@ function HeroCanvas() {
         }}
         shadows
         style={{ background: "transparent", touchAction: "none" }}
-        onCreated={({ gl }) => {
-          gl.setClearColor(0x000000, 0);
-        }}
+        fallback={<HeroImageFallback />}
+        onCreated={handleCreated}
       >
         <Scene3D />
       </Canvas>
@@ -327,14 +386,7 @@ function HeroCanvas() {
 
 export function Hero3D() {
   const { t } = useTranslation();
-  const [webglOk] = useState(() => {
-    try {
-      const canvas = document.createElement("canvas");
-      return !!(canvas.getContext("webgl") || canvas.getContext("webgl2"));
-    } catch {
-      return false;
-    }
-  });
+  const [canvasFailed, setCanvasFailed] = useState(false);
 
   const textVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -347,10 +399,12 @@ export function Hero3D() {
 
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden pt-24">
-      <AnimatedGradientBackground />
-      <div className="absolute inset-0 opacity-30">
-        <AssetImage src="/assets/images/hero.jpg" alt="" className="h-full w-full" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background" />
+      <AnimatedGradientBackground variant="hero" />
+      <div className="absolute inset-0 opacity-20 dark:opacity-30">
+        <AssetImage src="/assets/images/hero.jpg" alt="" className="h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/75 to-background dark:from-background/60 dark:via-background/40 dark:to-background" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/50 to-background/20 dark:hidden" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_75%_45%,rgba(201,169,98,0.12),transparent_55%)] dark:hidden" />
       </div>
 
       <div className="container-luxury relative z-10 grid items-center gap-8 px-4 md:px-8 lg:grid-cols-2">
@@ -360,7 +414,7 @@ export function Hero3D() {
             initial="hidden"
             animate="visible"
             variants={textVariants}
-            className="mb-4 text-sm font-medium uppercase tracking-[0.3em] text-gold"
+            className="mb-4 text-sm font-medium uppercase tracking-[0.3em] text-[#8b7035] dark:text-gold"
           >
             {t("hero.eyebrow")}
           </motion.p>
@@ -371,14 +425,14 @@ export function Hero3D() {
             variants={textVariants}
             className="font-serif text-5xl font-bold leading-tight md:text-7xl lg:text-8xl"
           >
-            <span className="text-gradient-gold">{t("hero.title")}</span>
+            <span className="text-gradient-gold-hero">{t("hero.title")}</span>
           </motion.h1>
           <motion.p
             custom={2}
             initial="hidden"
             animate="visible"
             variants={textVariants}
-            className="mt-6 max-w-lg text-lg text-muted-foreground md:text-xl"
+            className="mt-6 max-w-lg text-lg text-[#3d2e1f]/85 md:text-xl dark:text-muted-foreground"
           >
             {t("hero.subtitle")}
           </motion.p>
@@ -395,7 +449,12 @@ export function Hero3D() {
               </Button>
             </MagneticButton>
             <MagneticButton>
-              <Button asChild variant="outline" size="lg">
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="border-gold/50 bg-white/50 text-[#7a6030] backdrop-blur-sm hover:border-gold hover:bg-gold/15 hover:text-[#5c4818] dark:border-gold/40 dark:bg-transparent dark:text-gold dark:hover:bg-gold/10"
+              >
                 <Link to="/gallery">{t("hero.viewGallery")}</Link>
               </Button>
             </MagneticButton>
@@ -408,14 +467,12 @@ export function Hero3D() {
           transition={{ duration: 1, delay: 0.3 }}
           className="relative hidden lg:block"
         >
-          {webglOk ? (
-            <HeroCanvas />
+          {canvasFailed ? (
+            <HeroImageFallback />
           ) : (
-            <AssetImage
-              src="/assets/menu/signature-velvet-espresso.jpg"
-              alt="Velvet Bistro espresso"
-              className="h-[400px] w-full rounded-3xl object-cover glow-gold lg:h-[500px]"
-            />
+            <CanvasErrorBoundary fallback={<HeroImageFallback />}>
+              <HeroCanvas onContextLost={() => setCanvasFailed(true)} />
+            </CanvasErrorBoundary>
           )}
         </motion.div>
       </div>
@@ -424,7 +481,7 @@ export function Hero3D() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-muted-foreground"
+        className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-[#5c4a3a]/75 dark:text-muted-foreground"
       >
         <span className="text-xs uppercase tracking-widest">{t("hero.scroll")}</span>
         <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>

@@ -40,6 +40,7 @@ export function TeamSection({ members }: TeamSectionProps) {
                   <AssetImage
                     src={member.image}
                     alt={member.name}
+                    priority={i === 0}
                     className="h-72 w-full transition duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />

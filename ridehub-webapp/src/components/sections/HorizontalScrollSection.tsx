@@ -37,7 +37,7 @@ export function HorizontalScrollSection() {
     })
 
     return () => {
-      tween.scrollTrigger?.kill(false)
+      tween.scrollTrigger?.kill(true)
       tween.kill()
     }
   }, [products.length])

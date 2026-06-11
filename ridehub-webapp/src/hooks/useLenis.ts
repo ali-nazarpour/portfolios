@@ -5,6 +5,16 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
+let activeLenis: Lenis | null = null
+
+export function resetScrollOnNavigation() {
+  if (activeLenis) {
+    activeLenis.scrollTo(0, { immediate: true })
+  } else {
+    window.scrollTo(0, 0)
+  }
+}
+
 export function useLenis() {
   const lenisRef = useRef<Lenis | null>(null)
 
@@ -19,6 +29,7 @@ export function useLenis() {
     })
 
     lenisRef.current = lenis
+    activeLenis = lenis
     lenis.on('scroll', ScrollTrigger.update)
 
     const raf = (time: number) => lenis.raf(time * 1000)
@@ -28,7 +39,8 @@ export function useLenis() {
     return () => {
       gsap.ticker.remove(raf)
       lenis.destroy()
-      ScrollTrigger.getAll().forEach((t) => t.kill(false))
+      activeLenis = null
+      ScrollTrigger.getAll().forEach((t) => t.kill(true))
     }
   }, [])
 
@@ -66,9 +78,9 @@ export function useScrollProgress() {
   return progressRef
 }
 
-/** Kill all ScrollTriggers without reverting pin transforms (safe during React unmount). */
+/** Kill all ScrollTriggers and revert pin spacers so the next route lays out cleanly. */
 export function killAllScrollTriggers() {
-  ScrollTrigger.getAll().forEach((trigger) => trigger.kill(false))
+  ScrollTrigger.getAll().forEach((trigger) => trigger.kill(true))
 }
 
 export { gsap, ScrollTrigger }

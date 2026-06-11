@@ -6,7 +6,7 @@ export const teamMembers: TeamMember[] = [
     name: "Laurent Moreau",
     role: "Executive Chef",
     bio: "Two Michelin-star trained, Laurent brings 20 years of haute cuisine experience from Lyon to Geneva.",
-    image: "/assets/images/chef.jpg",
+    image: "/assets/images/team-laurent.jpg",
     social: [
       { platform: "instagram", url: "https://instagram.com/velvetbistro" },
       { platform: "linkedin", url: "https://linkedin.com/company/velvetbistro" },
@@ -17,7 +17,7 @@ export const teamMembers: TeamMember[] = [
     name: "Sophie Chen",
     role: "Head Pastry Chef",
     bio: "Award-winning patissière specializing in modern French desserts with Asian-inspired accents.",
-    image: "/assets/gallery/gallery-10.jpg",
+    image: "/assets/images/team-sophie.jpg",
     social: [{ platform: "instagram", url: "https://instagram.com/velvetbistro" }],
   },
   {
@@ -25,7 +25,7 @@ export const teamMembers: TeamMember[] = [
     name: "Marco Bellini",
     role: "Head Mixologist",
     bio: "World-class bartender crafting signature cocktails that complement our culinary philosophy.",
-    image: "/assets/gallery/gallery-06.jpg",
+    image: "/assets/images/team-marco.jpg",
     social: [
       { platform: "instagram", url: "https://instagram.com/velvetbistro" },
       { platform: "x", url: "https://x.com/velvetbistro" },

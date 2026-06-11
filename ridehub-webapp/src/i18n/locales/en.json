@@ -330,10 +330,13 @@
       "motorcycles": "Electric Motorcycles",
       "motorcyclesDesc": "Zero-emission performance",
       "warranty": "Extended Warranty",
+      "warrantyDesc": "Up to 5 years of coverage on select bikes and e-mobility products.",
       "showroom": "Flagship Showroom",
       "showroomDesc": "San Francisco — test rides by appointment",
       "fleet": "Fleet Solutions",
-      "curated": "Expert Curated"
+      "fleetDesc": "Corporate and delivery fleets with bulk pricing and service plans.",
+      "curated": "Expert Curated",
+      "curatedDesc": "Every model hand-picked by our team for quality, safety, and ride feel."
     },
     "story": {
       "badge": "The RideHub Experience",

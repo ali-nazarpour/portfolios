@@ -11,7 +11,7 @@ export function BrandShowcase() {
   return (
     <section className="py-24 lg:py-32 relative overflow-hidden">
       <div className="absolute inset-0 gradient-bg opacity-50" />
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 w-full">
         <ScrollReveal>
           <SectionHeading title={t('brands.title')} subtitle={t('brands.subtitle')} />
         </ScrollReveal>

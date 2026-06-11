@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -39,76 +39,101 @@ const storySteps = [
 
 export function ScrollStorySection() {
   const { t } = useTranslation();
-  const sectionRef = useRef<HTMLElement>(null);
-  const pinRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    const pin = pinRef.current;
-    if (!section || !pin) return;
+    const container = containerRef.current;
+    if (!container) return;
 
-    const panels = pin.querySelectorAll<HTMLElement>("[data-story-panel]");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
+    const slides = container.querySelectorAll<HTMLElement>("[data-story-slide]");
+
     const ctx = gsap.context(() => {
-      panels.forEach((panel, i) => {
-        if (i === 0) return;
-        gsap.set(panel, { opacity: 0, y: 40 });
-      });
+      slides.forEach((slide) => {
+        const text = slide.querySelector("[data-story-text]");
+        const image = slide.querySelector("[data-story-image]");
 
-      ScrollTrigger.create({
-        trigger: section,
-        start: "top top",
-        end: `+=${storySteps.length * 100}%`,
-        pin: pin,
-        scrub: 1,
-        onUpdate: (self) => {
-          const progress = self.progress;
-          const activeIndex = Math.min(
-            Math.floor(progress * storySteps.length),
-            storySteps.length - 1
+        if (text) {
+          gsap.fromTo(
+            text,
+            { opacity: 0.35, y: 32 },
+            {
+              opacity: 1,
+              y: 0,
+              ease: "none",
+              scrollTrigger: {
+                trigger: slide,
+                start: "top 75%",
+                end: "top 35%",
+                scrub: 1,
+              },
+            },
           );
+        }
 
-          panels.forEach((panel, i) => {
-            gsap.to(panel, {
-              opacity: i === activeIndex ? 1 : 0,
-              y: i === activeIndex ? 0 : 40,
-              duration: 0.3,
-              overwrite: true,
-            });
-          });
-        },
+        if (image) {
+          gsap.fromTo(
+            image,
+            { scale: 1.08 },
+            {
+              scale: 1,
+              ease: "none",
+              scrollTrigger: {
+                trigger: slide,
+                start: "top bottom",
+                end: "top 35%",
+                scrub: 1,
+              },
+            },
+          );
+        }
       });
-    }, section);
+    }, container);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative">
-      <div ref={pinRef} className="relative flex min-h-screen items-center section-padding">
-        <div className="container-luxury grid items-center gap-12 lg:grid-cols-2">
-          <div className="relative min-h-[400px]">
-            {storySteps.map((step) => (
+    <section className="relative isolate bg-background">
+      <div className="section-padding pb-10 md:pb-12">
+        <div className="container-luxury">
+          <p className="text-sm uppercase tracking-widest text-gold">{t("premium.story.eyebrow")}</p>
+        </div>
+      </div>
+
+      <div ref={containerRef} className="relative">
+        {storySteps.map((step, index) => (
+          <article
+            key={step.id}
+            data-story-slide
+            className="sticky top-0 flex min-h-screen items-center section-padding bg-background"
+            style={{ zIndex: index + 1 }}
+          >
+            <div className="container-luxury grid w-full items-center gap-10 lg:grid-cols-2 lg:gap-16">
               <div
-                key={step.id}
-                data-story-panel
-                className="absolute inset-0 overflow-hidden rounded-2xl border border-border/50"
+                data-story-image
+                className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-border/50 lg:max-h-[560px] lg:justify-self-end"
               >
                 <AssetImage src={step.image} alt={step.title} className="h-full w-full" />
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-charcoal/10 to-transparent" />
               </div>
-            ))}
-          </div>
 
-          <div className="relative min-h-[280px]">
-            <p className="text-sm uppercase tracking-widest text-gold">{t("premium.story.eyebrow")}</p>
-            {storySteps.map((step) => (
-              <div key={step.id} data-story-panel className="absolute inset-0">
-                <h2 className="font-serif text-3xl md:text-4xl">{step.title}</h2>
-                <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{step.description}</p>
+              <div data-story-text className="lg:justify-self-start">
+                <span className="text-sm font-medium text-gold/80">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h2 className="mt-3 font-serif text-3xl md:text-4xl lg:text-5xl">{step.title}</h2>
+                <p className="mt-4 max-w-lg text-base leading-relaxed text-muted-foreground md:text-lg">
+                  {step.description}
+                </p>
               </div>
-            ))}
-          </div>
-        </div>
+            </div>
+          </article>
+        ))}
+
+        <div className="h-[20vh]" aria-hidden />
       </div>
     </section>
   );
