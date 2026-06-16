@@ -15,6 +15,5 @@ export const galleryItems: GalleryItem[] = [
   { id: '12', src: '/assets/gallery/lifestyle-2.jpg', alt: 'Weekend cycling lifestyle', category: 'lifestyle' },
   { id: '13', src: '/assets/gallery/tech-1.jpg', alt: 'Electric scooter technology detail', category: 'technology' },
   { id: '14', src: '/assets/gallery/tech-2.jpg', alt: 'Electric motorcycle battery technology', category: 'technology' },
-  { id: '15', src: '/assets/images/hero-bg.jpg', alt: 'RideHub premium mobility', category: 'lifestyle' },
-  { id: '16', src: '/assets/images/about-showroom.jpg', alt: 'RideHub flagship showroom', category: 'showroom' },
+  { id: '15', src: '/assets/images/about-showroom.jpg', alt: 'RideHub flagship showroom', category: 'showroom' },
 ]

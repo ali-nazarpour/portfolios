@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
 import { ArrowRight, ChevronDown } from 'lucide-react'
-import { Hero3DLazy } from '@/components/three/Hero3DLazy'
+import { HeroVisual } from '@/components/sections/HeroVisual'
 import { AnimatedGradientBackground } from '@/components/ui/AnimatedGradientBackground'
 import { MagneticButton } from '@/components/ui/MagneticButton'
 import { brands } from '@/data/products'
@@ -86,7 +86,7 @@ export function HeroSection() {
             transition={{ duration: 1, delay: 0.3 }}
             className="order-first lg:order-none"
           >
-            <Hero3DLazy />
+            <HeroVisual />
           </motion.div>
         </div>
       </div>

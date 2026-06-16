@@ -19,12 +19,12 @@ export function SocialFeedSection() {
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
         {socialPosts.map((post, i) => (
-          <ScrollReveal key={post.id} delay={i * 0.06}>
+          <ScrollReveal key={post.id} delay={i * 0.06} className="min-w-0">
             <motion.div
               whileHover={{ scale: 1.03 }}
-              className={`group relative rounded-2xl overflow-hidden cursor-pointer ${i === 0 ? 'md:col-span-2 md:row-span-2' : ''}`}
+              className="group relative w-full rounded-2xl overflow-hidden cursor-pointer"
             >
-              <div className={i === 0 ? 'aspect-square md:aspect-auto md:h-full min-h-[200px]' : 'aspect-square'}>
+              <div className="aspect-square w-full">
                 <img src={post.image} alt={post.caption} className="w-full h-full object-cover" loading="lazy" />
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
